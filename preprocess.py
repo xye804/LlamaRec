@@ -27,10 +27,7 @@ class DataPreprocess:
         behaviors_df = behaviors_df[behaviors_df['History'].apply(lambda x: 5 <= len(x) <= 40)]
 
         if self.mode != "train":
-            val_behaviors_df, test_behaviors_df = train_test_split(behaviors_df, test_size=0.3, random_state=42)
-            val_behaviors_df = val_behaviors_df.sample(400, random_state=42)
-            test_behaviors_df = test_behaviors_df.sample(800, random_state=42)
+            val_behaviors_df, test_behaviors_df = train_test_split(behaviors_df, test_size=0.5, random_state=42)
             return news_df, val_behaviors_df, test_behaviors_df
         else:
-            # behaviors_df = behaviors_df.sample(10, random_state=42)
             return news_df, behaviors_df
