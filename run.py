@@ -103,7 +103,7 @@ def train():
                 loss = criterion(output_df, labels_df)
                 total_loss += loss.item()
 
-                if (cnt + 1) % (log_batch // 4) == 0:
+                if (cnt + 1) % log_batch == 0:
                     print(f"Epoch {epoch + 1}/{num_epoch}, "
                           f"Batch {cnt + 1}/{len(val_dataloader)}, "
                           f"Loss: {loss:.4f}, "
@@ -151,7 +151,7 @@ def test():
             labels_df = torch.tensor(all_labels).float().to("cuda")
             output_df = torch.tensor(all_outputs).to("cuda")
 
-            if (cnt + 1) % (log_batch // 4) == 0:
+            if (cnt + 1) % log_batch == 0:
                 print(f"Batch {cnt + 1}/{len(test_dataloader)}, "
                         f"AUC: {roc_auc_score(all_labels, all_outputs):.4f}, "
                         f"DCG@5: {np.mean(DCG5):.4f}, "
